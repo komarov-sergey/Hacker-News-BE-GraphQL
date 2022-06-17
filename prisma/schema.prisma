@@ -21,20 +21,22 @@ model Link {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  name     String
-  email    String @unique
-  password String
-  links    Link[]
-  votes    Vote[]
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  name      String
+  email     String   @unique
+  password  String
+  links     Link[]
+  votes     Vote[]
 }
 
 model Vote {
-  id     Int  @id @default(autoincrement())
-  link   Link @relation(fields: [linkId], references: [id])
-  linkId Int
-  user   User @relation(fields: [userId], references: [id])
-  userId Int
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  link      Link     @relation(fields: [linkId], references: [id])
+  linkId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
 
   @@unique([linkId, userId])
 }
